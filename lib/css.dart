@@ -15,8 +15,8 @@ var css = ThemeData(
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            primary: Colors.redAccent.shade100,
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+            primary: Colors.white,
             onPrimary: Colors.redAccent,
             textStyle: TextStyle(
                 fontFamily: 'BMJUA', fontSize: 12, color: Colors.black87))),

@@ -1,3 +1,5 @@
+import 'package:cbnu_restaurant/screens/search.dart';
+import 'package:cbnu_restaurant/screens/testtt.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -8,8 +10,10 @@ import 'package:provider/provider.dart';
 import 'package:cbnu_restaurant/api/get_marker_data.dart';
 
 class GoogleMapScreen extends StatefulWidget {
-  GoogleMapScreen({Key? key, this.onchangenav}) : super(key: key);
+  GoogleMapScreen({Key? key, this.onchangenav, this.fabHeight})
+      : super(key: key);
   final onchangenav;
+  final fabHeight;
 
   @override
   State<GoogleMapScreen> createState() => _GoogleMapScreenState();
@@ -18,7 +22,11 @@ class GoogleMapScreen extends StatefulWidget {
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
   final Set<Marker> _markers = {};
   final Set<Marker> _markers2 = {};
-  late List<Set<Marker>> markerss = [_markers, _markers2];
+  final Set<Marker> _markers3 = {};
+  final Set<Marker> _markers4 = {};
+  final Set<Marker> _markers5 = {};
+  final Set<Marker> _markers6 = {};
+  late List<Set<Marker>> markerss = [_markers, _markers2,_markers3,_markers4,_markers5,_markers6];
   late GoogleMapController _mapController;
   late BitmapDescriptor _mapMarker;
   var markerData;
@@ -39,6 +47,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   getData(url, i) async {
     var result = await GetMarker().getHttp(url);
     if (result != null) {
+      context.read<Store>().addAllR(result);
       setState(() {
         result.forEach((e) {
           markerss[i].add(Marker(
@@ -118,7 +127,10 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
               width: MediaQuery.of(context).size.width - 24,
               height: 50,
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                  color: Colors.white, borderRadius: BorderRadius.circular(5),boxShadow: [BoxShadow(
+                color: Colors.grey,
+                blurRadius: 4,
+              )]),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +142,11 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              showSearch(
+                                  context: context,
+                                  delegate: CustomSearchDelegate());
+                            },
                             icon: Icon(
                               Icons.manage_search,
                               size: 35,
@@ -163,35 +179,27 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
               ),
             )),
         Positioned(
-            top: 100,
+            top: 105,
             left: 12,
             child: ElevatedButton(
               onPressed: () {
-                widget.onchangenav(0);
+                Get.to(Testtt());
               },
               child: Text(
                 "오늘은 뭐먹지?",
-                style: TextStyle(color: Colors.black87),
+                style: TextStyle(color: Colors.redAccent.shade100),
               ),
             )),
         Positioned(
-            top: 100,
-            right: 12,
-            child: ElevatedButton(
-              onPressed: () {
-                widget.onchangenav(1);
-              },
-              child: Text(
-                "맛있게 먹었으면 광고한번?",
-                style: TextStyle(color: Colors.black87),
-              ),
-            )),
+          bottom: widget.fabHeight,
+          right: 12,
+          child: FloatingActionButton(
+            backgroundColor: Colors.white,
+            onPressed: _UpdatePosition,
+            child: Icon(Icons.location_on_outlined, color: Colors.black87),
+          ),
+        )
       ]),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
-        onPressed: _UpdatePosition,
-        child: Icon(Icons.location_on_outlined, color: Colors.black87),
-      ),
     );
   }
 }

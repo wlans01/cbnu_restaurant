@@ -48,7 +48,7 @@ class _SidebarState extends State<Sidebar> {
                   leading: Icon(Icons.question_answer_outlined),
                   title: Text("문의하기"),
                   onTap: () {
-                    Get.to(Ing());
+                    print(context.read<Store>().allR[1][0].title);
                   },
                 ),
                 ListTile(
