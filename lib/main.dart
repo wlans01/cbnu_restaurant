@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
           minHeight: _panelHeightClosed,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(18.0), topRight: Radius.circular(18.0)),
-          panelBuilder: (sc) => panel(sc,context),
+          panelBuilder: (sc) => panel(sc, context),
           parallaxEnabled: true,
           parallaxOffset: .5,
           onPanelSlide: (double pos) => setState(() {
@@ -126,10 +126,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-
-
-
-
 }
-

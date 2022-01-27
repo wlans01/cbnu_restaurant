@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:cbnu_restaurant/model/markerdata.dart';
 
 class Store extends ChangeNotifier {
   //유저 정보
@@ -37,9 +37,8 @@ class Store extends ChangeNotifier {
   ];
 
   //음식종류별 그거
-  var allR = [];
-
+  List<Markerdata> allR =[];
   addAllR(a){
-    allR.add(a);
+    allR = a;
   }
 }

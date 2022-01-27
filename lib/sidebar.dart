@@ -2,7 +2,6 @@ import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:cbnu_restaurant/store/store.dart';
-import 'package:cbnu_restaurant/screens/ing_ing.dart';
 import 'package:cbnu_restaurant/screens/setting.dart';
 
 class Sidebar extends StatefulWidget {
@@ -32,15 +31,15 @@ class _SidebarState extends State<Sidebar> {
                     children: [
                       context.read<Store>().isLogin
                           ? Text("안녕하세요 \n${context.watch<Store>().name}님",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 25,
-                          ))
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 25,
+                              ))
                           : Text('로그인후 이용해주세요',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 25,
-                          )),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 25,
+                              )),
                     ],
                   ),
                 ),
@@ -48,7 +47,7 @@ class _SidebarState extends State<Sidebar> {
                   leading: Icon(Icons.question_answer_outlined),
                   title: Text("문의하기"),
                   onTap: () {
-                    print(context.read<Store>().allR[1][0].title);
+                    print(context.read<Store>().allR);
                   },
                 ),
                 ListTile(

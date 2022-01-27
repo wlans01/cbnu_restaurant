@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:cbnu_restaurant/store/store.dart';
+import 'package:provider/provider.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
-  List<String> searchTerms = [
-    'apple',
-    'baaeb',
-    'aerb',
-    'aerb',
-    'aerfa',
-  ];
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -32,9 +26,9 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var fruit in searchTerms) {
-      if (fruit.toLowerCase().contains(query.toLowerCase())) {
+    List matchQuery = [];
+    for (var fruit in context.read<Store>().allR) {
+      if (fruit.title.toLowerCase().contains(query.toLowerCase())) {
         matchQuery.add(fruit);
       }
     }
@@ -44,6 +38,8 @@ class CustomSearchDelegate extends SearchDelegate {
         var result = matchQuery[index];
         return ListTile(
           title: Text(result),
+          subtitle: Text('sef'),
+
         );
       },
     );
@@ -51,9 +47,9 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var fruit in searchTerms) {
-      if (fruit.toLowerCase().contains(query.toLowerCase())) {
+    List matchQuery = [];
+    for (var fruit in context.read<Store>().allR) {
+      if (fruit.title.toLowerCase().contains(query.toLowerCase())) {
         matchQuery.add(fruit);
       }
     }
@@ -62,9 +58,11 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         var result = matchQuery[index];
         return ListTile(
-          title: Text(result),
+          title: Text(result.title),
+          subtitle: Text(result.type),
         );
       },
     );
   }
 }
+

@@ -1,5 +1,5 @@
-import 'package:cbnu_restaurant/screens/search.dart';
 import 'package:cbnu_restaurant/screens/testtt.dart';
+import 'package:cbnu_restaurant/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -20,13 +20,21 @@ class GoogleMapScreen extends StatefulWidget {
 }
 
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
-  final Set<Marker> _markers = {};
-  final Set<Marker> _markers2 = {};
-  final Set<Marker> _markers3 = {};
-  final Set<Marker> _markers4 = {};
-  final Set<Marker> _markers5 = {};
-  final Set<Marker> _markers6 = {};
-  late List<Set<Marker>> markerss = [_markers, _markers2,_markers3,_markers4,_markers5,_markers6];
+  final Set<Marker> _markersA = {};
+  final Set<Marker> _markersK = {};
+  final Set<Marker> _markersJ = {};
+  final Set<Marker> _markersC = {};
+  final Set<Marker> _markersW = {};
+  final Set<Marker> _markersM = {};
+  late List<Set<Marker>> markerss = [
+    _markersA,
+    _markersK,
+    _markersJ,
+    _markersC,
+    _markersW,
+    _markersM
+  ];
+  final List<String> _identification = ['a', 'k', 'j', 'c', 'w', 'm'];
   late GoogleMapController _mapController;
   late BitmapDescriptor _mapMarker;
   var markerData;
@@ -38,29 +46,42 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   @override
   void initState() {
     super.initState();
-    for (var i = 0; i < context.read<Store>().uirlList.length; i++) {
-      getData(context.read<Store>().uirlList[i], i);
-    }
+    getData();
     setCustomMarker();
   }
 
-  getData(url, i) async {
-    var result = await GetMarker().getHttp(url);
+  getData() async {
+    var result = await GetMarker().getHttp();
     if (result != null) {
+      print(result);
       context.read<Store>().addAllR(result);
-      setState(() {
-        result.forEach((e) {
-          markerss[i].add(Marker(
-              onTap: () {
-                widget.onchangenav(1);
-              },
-              markerId: MarkerId(e.id),
-              position: LatLng(e.latitude, e.longitude),
-              icon: _mapMarker,
-              infoWindow: InfoWindow(
-                  title: e.title, snippet: e.snippet, onTap: () {})));
+      for (var i = 0; i < _identification.length; i++) {
+        if (i == 0) {
+          setState(() {
+            result.forEach((e) {
+              _markersA.add(Marker(
+                  onTap: () {},
+                  markerId: MarkerId(e.id),
+                  position: LatLng(e.latitude, e.longitude),
+                  icon: _mapMarker,
+                  infoWindow: InfoWindow(
+                      title: e.title, snippet: e.type, onTap: () {})));
+            });
+          });
+        }
+        var res = result.where((e) => e.type == _identification[i]);
+        setState(() {
+          res.forEach((e) {
+            markerss[i].add(Marker(
+                onTap: () {},
+                markerId: MarkerId(e.id),
+                position: LatLng(e.latitude, e.longitude),
+                icon: _mapMarker,
+                infoWindow:
+                    InfoWindow(title: e.title, snippet: e.type, onTap: () {})));
+          });
         });
-      });
+      }
     } else {
       Get.snackbar('가맹점 데이터 가져오기 실패', "데이터가 비어있음?!");
     }
@@ -71,7 +92,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
         ImageConfiguration(), 'assets/ga.png');
   }
 
-  Future<void> _UpdatePosition() async {
+  Future<void> _updatePosition() async {
     Position pos = await _determinePosition();
     currentPosition = LatLng(pos.latitude, pos.longitude);
     var cameraPosition = CameraPosition(target: currentPosition, zoom: 15);
@@ -127,10 +148,14 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
               width: MediaQuery.of(context).size.width - 24,
               height: 50,
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(5),boxShadow: [BoxShadow(
-                color: Colors.grey,
-                blurRadius: 4,
-              )]),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 4,
+                    )
+                  ]),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,7 +220,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
           right: 12,
           child: FloatingActionButton(
             backgroundColor: Colors.white,
-            onPressed: _UpdatePosition,
+            onPressed: _updatePosition,
             child: Icon(Icons.location_on_outlined, color: Colors.black87),
           ),
         )
