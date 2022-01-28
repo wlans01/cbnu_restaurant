@@ -86,6 +86,9 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
       Get.snackbar('가맹점 데이터 가져오기 실패', "데이터가 비어있음?!");
     }
   }
+  void markertap(){
+
+  }
 
   void setCustomMarker() async {
     _mapMarker = await BitmapDescriptor.fromAssetImage(

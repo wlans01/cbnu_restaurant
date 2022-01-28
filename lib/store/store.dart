@@ -38,6 +38,12 @@ class Store extends ChangeNotifier {
 
   //음식종류별 그거
   List<Markerdata> allR =[];
+  List<Markerdata> kR =[];
+  List<Markerdata> jR =[];
+  List<Markerdata> cR =[];
+  List<Markerdata> wR =[];
+  List<Markerdata> mR =[];
+
   addAllR(a){
     allR = a;
   }
