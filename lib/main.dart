@@ -49,29 +49,14 @@ class _HomePageState extends State<HomePage> {
   double _panelHeightOpen = 0;
   final double _panelHeightClosed = 95.0;
 
-  void onchangenav(int i) {
-    switch (i) {
-      case 0:
-        setState(() {
-          snakeBarStyle = SnakeBarBehaviour.floating;
-          snakeShape = SnakeShape.indicator;
-          padding = const EdgeInsets.only(left: 12, right: 12, bottom: 24);
-        });
-        break;
-      case 1:
-        setState(() {
-          snakeBarStyle = SnakeBarBehaviour.pinned;
-          snakeShape = SnakeShape.indicator;
-          padding = EdgeInsets.zero;
-        });
-    }
-  }
+
+
 
   @override
   void initState() {
     super.initState();
-
     fabHeight = _initFabHeight;
+
   }
 
   @override
@@ -94,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                     _initFabHeight;
               }),
           body:
-              GoogleMapScreen(onchangenav: onchangenav, fabHeight: fabHeight)),
+              GoogleMapScreen( fabHeight: fabHeight)),
       drawer: Sidebar(),
       bottomNavigationBar: SnakeNavigationBar.color(
         behaviour: snakeBarStyle,

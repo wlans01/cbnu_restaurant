@@ -28,23 +28,39 @@ class Store extends ChangeNotifier {
 
   //데이터 주소모음
   List<String> uirlList = [
-    'https://wlans01.github.io/testdata/data2.json',
-    'https://wlans01.github.io/testdata/data.json',
-    'https://wlans01.github.io/testdata/data.json',
-    'https://wlans01.github.io/testdata/data.json',
-    'https://wlans01.github.io/testdata/data.json',
-    'https://wlans01.github.io/testdata/data.json',
+    'https://wlans01.github.io/testdata/k.json',
+    'https://wlans01.github.io/testdata/j.json',
+    'https://wlans01.github.io/testdata/c.json',
+    'https://wlans01.github.io/testdata/w.json',
+    'https://wlans01.github.io/testdata/m.json',
   ];
 
   //음식종류별 그거
-  List<Markerdata> allR =[];
-  List<Markerdata> kR =[];
-  List<Markerdata> jR =[];
-  List<Markerdata> cR =[];
-  List<Markerdata> wR =[];
-  List<Markerdata> mR =[];
 
-  addAllR(a){
-    allR = a;
+  List<Markerdata> kR = [];
+  List<Markerdata> jR = [];
+  List<Markerdata> cR = [];
+  List<Markerdata> wR = [];
+  List<Markerdata> mR = [];
+  late List<Markerdata> allR = [...kR, ...jR, ...cR, ...wR, ...mR];
+
+  addAllR(a, i) {
+    switch (i) {
+      case 0:
+        kR = a;
+        break;
+      case 1:
+        jR = a;
+        break;
+      case 2:
+        cR = a;
+        break;
+      case 3:
+        wR = a;
+        break;
+      case 4:
+        mR = a;
+        break;
+    }
   }
 }

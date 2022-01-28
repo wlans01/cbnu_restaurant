@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:cbnu_restaurant/model/markerdata.dart';
 
 class GetMarker {
-  getHttp() async {
+  getHttp(url) async {
     try {
       var response =
-          await Dio().get('https://wlans01.github.io/testdata/data.json');
+          await Dio().get(url);
       List<Markerdata> markerdata = (response.data)
           .map<Markerdata>((json) => Markerdata.fromJson(json))
           .toList();

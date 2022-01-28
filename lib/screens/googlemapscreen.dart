@@ -10,9 +10,9 @@ import 'package:provider/provider.dart';
 import 'package:cbnu_restaurant/api/get_marker_data.dart';
 
 class GoogleMapScreen extends StatefulWidget {
-  GoogleMapScreen({Key? key, this.onchangenav, this.fabHeight})
+  GoogleMapScreen({Key? key,  this.fabHeight})
       : super(key: key);
-  final onchangenav;
+
   final fabHeight;
 
   @override
@@ -46,15 +46,16 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   @override
   void initState() {
     super.initState();
-    getData();
+    for(var i =0;i < context.read<Store>().uirlList.length; i++){
+      getData(i);
+    }
     setCustomMarker();
   }
 
-  getData() async {
-    var result = await GetMarker().getHttp();
+  getData(i) async {
+    var result = await GetMarker().getHttp(context.read<Store>().uirlList[i]);
     if (result != null) {
-      print(result);
-      context.read<Store>().addAllR(result);
+      context.read<Store>().addAllR(result,i);
       for (var i = 0; i < _identification.length; i++) {
         if (i == 0) {
           setState(() {
