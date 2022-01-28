@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Widget button(String label, IconData icon, Color color) {
   return GestureDetector(
-    onTap: (){print('나를 누른것인가????????????????????????????');},
+    onTap: (){},
     child: Column(
       children: <Widget>[
         Container(

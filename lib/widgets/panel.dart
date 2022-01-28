@@ -2,7 +2,7 @@ import 'package:cbnu_restaurant/widgets/Signboard.dart';
 import 'package:cbnu_restaurant/widgets/circlebutton.dart';
 import 'package:flutter/material.dart';
 
-Widget panel(ScrollController sc, context) {
+Widget panel(ScrollController sc, context ,data) {
   return MediaQuery.removePadding(
       context: context,
       removeTop: true,
@@ -61,8 +61,8 @@ Widget panel(ScrollController sc, context) {
             padding: const EdgeInsets.only(left: 12, right: 12),
             sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate(
-                  (context, index) => rest(),
-                  childCount: 7,
+                  (context, index) => rest(data[index]),
+                  childCount: data.length,
                 ),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,

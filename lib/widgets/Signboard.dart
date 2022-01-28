@@ -1,32 +1,95 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget rest() {
-  return Container(
-    padding: const EdgeInsets.all(5),
-    decoration: BoxDecoration(
-      color: Colors.deepOrange.shade50,
-      borderRadius: BorderRadius.circular(10),
-    ),
-    child: Row(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 5),
-              child: Text(
-                '가게이름은 우리집냉면',
-                style: TextStyle(fontSize: 18),
-              ),
+Widget rest(data) {
+  return GestureDetector(
+    onTap: (){},
+    child: Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.deepOrange.shade50,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  data.title,
+                  style: TextStyle(fontSize: 20),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  data.snippet,
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ],
             ),
-            Text('돼지 주물럭, 무쌈냉면', overflow: TextOverflow.ellipsis),
-            Row(
-              children: [Icon(Icons.favorite,size: 20,), Text('52')],
-            )
-          ],
-        )
-      ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "5.0",
+                    style: TextStyle(color: Colors.redAccent),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.star,
+                        size: 15,
+                        color: Colors.redAccent,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 15,
+                        color: Colors.redAccent,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 15,
+                        color: Colors.redAccent,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 15,
+                        color: Colors.redAccent,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 15,
+                        color: Colors.redAccent,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text("(26)")
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(data.holiday,overflow: TextOverflow.ellipsis,maxLines: 1,),
+              SizedBox(
+                height: 5,
+              ),
+              Text(data.phienumber)
+            ],
+          )
+        ],
+      ),
     ),
   );
 }
